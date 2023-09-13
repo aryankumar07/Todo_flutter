@@ -3,7 +3,10 @@ import 'package:todo/utilits/my_button.dart';
 
 class DialogBox extends StatelessWidget{
 
-  DialogBox({super.key});
+  DialogBox({super.key,required this.controller,required this.onSave,required this.onCancel});
+  final controller;
+  VoidCallback onSave;
+  VoidCallback onCancel;
   
   @override
   Widget build(context) {
@@ -15,6 +18,7 @@ class DialogBox extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextField(
+              controller: controller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "Add a new Task"
@@ -24,9 +28,9 @@ class DialogBox extends StatelessWidget{
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                MyButton(onPressed: () {}, text: "Save"),
+                MyButton(onPressed: onSave, text: "Save"),
                 Spacer(),
-                MyButton(onPressed: () {}, text: "Cancel")
+                MyButton(onPressed: onCancel, text: "Cancel")
               ],
             )
           ],
